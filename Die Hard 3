@@ -1,0 +1,36 @@
+#include <stdio.h>
+
+// Function to compute GCD using Euclidean algorithm
+int gcd(int a, int b) {
+    while (b != 0) {
+        int temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
+}
+
+int canMeasure(int a, int b, int c) {
+    if (c > (a > b ? a : b))
+        return 0;
+    if (c % gcd(a, b) == 0)
+        return 1;
+    return 0;
+}
+
+int main() {
+    int T;
+    scanf("%d", &T);
+
+    while (T--) {
+        int a, b, c;
+        scanf("%d %d %d", &a, &b, &c);
+
+        if (canMeasure(a, b, c))
+            printf("YES\n");
+        else
+            printf("NO\n");
+    }
+
+    return 0;
+}
