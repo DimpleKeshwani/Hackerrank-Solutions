@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int T;
+    cin >> T;
+
+    while (T--) {
+        long long n, k;
+        cin >> n >> k;
+
+        vector<long long> freq(k, 0);
+        freq[0] = 1; // prefix sum 0 initially exists
+
+        long long prefix = 0;
+        long long ans = 0;
+
+        for (int i = 0; i < n; i++) {
+            long long x;
+            cin >> x;
+            prefix = (prefix + x) % k;
+
+            // make sure remainder is positive (not needed here since x is positive)
+            if (prefix < 0) prefix += k;
+
+            ans += freq[prefix];   // add number of prefix sums with same remainder
+            freq[prefix]++;        // increase the count of this remainder
+        }
+
+        cout << ans << "\n";
+    }
+
+    return 0;
+}
